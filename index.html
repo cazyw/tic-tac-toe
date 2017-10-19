@@ -8,11 +8,32 @@
         <title>Tic Tac Toe</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <!-- <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700,900n" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
         <link href="css\tictactoe.css" rel="stylesheet">
     </head>
 
     <body>
+        <h1>Tic Tac Toe</h1>
+        <div class="container-fluid board">
+            <div class="row">
+                <div id="b0" class="col-xs-4 box" onclick="game(this)"></div>
+                <div id="b1" class="col-xs-4 box" onclick="game(this)"></div>
+                <div id="b2" class="col-xs-4 box" onclick="game(this)"></div>
+            </div>
+            <div class="row">
+                <div id="b3" class="col-xs-4 box" onclick="game(this)"></div>
+                <div id="b4" class="col-xs-4 box" onclick="game(this)"></div>
+                <div id="b5" class="col-xs-4 box" onclick="game(this)"></div>
+            </div>
+            <div class="row">
+                <div id="b6" class="col-xs-4 box" onclick="game(this)"></div>
+                <div id="b7" class="col-xs-4 box" onclick="game(this)"></div>
+                <div id="b8" class="col-xs-4 box" onclick="game(this)"></div>
+            </div>
+        </div>
+        <div class="container-fluid buttons">
+            <button class="btn btn-warning clear" onclick="clearBoard()">Clear</button>
+        </div>
         
         
     <!-- Bootstrap core JavaScript

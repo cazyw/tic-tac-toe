@@ -13,3 +13,12 @@ Build an app that is functionally similar to this: https://codepen.io/FreeCodeCa
 
 
 ## Discussion
+
+I started with designing the basic look of the board for desktops, adding a chalkboard background (using radial gradients) and then implementing the javascript to mark an "X" or "O" the board and store the value in an array. The board can also be cleared and game reset.
+
+To do:
+* calculate when the game ends (winner or draw)
+* start a new game automatically after a game ends
+* implement scoring
+* implement two player feature
+* implement computer player logic
