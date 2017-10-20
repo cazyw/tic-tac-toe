@@ -13,12 +13,23 @@ button.clear {
   font-size: 1.5em;
 }
 
+.outcome {
+  margin: auto auto;
+  height: 50px;
+  width: 500px;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .board {
   margin: 10px auto;
   padding: 10px;
   border: 1px solid black;
-  height: 550px;
-  width: 550px;
+  height: 500px;
+  width: 500px;
   box-sizing: content-box;
   font-size: 10em;
   background-image: -webkit-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
@@ -36,8 +47,10 @@ button.clear {
   padding: 0;
 }
 .box {
-  height: 175px;
-  width: 175px;
+  /* height: 175px;
+  width: 175px; */
+  height: 150px;
+  width: 150px;
   padding: 0;
   margin: 0;
   cursor: pointer;
