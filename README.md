@@ -27,3 +27,4 @@ To do:
 * Add design feature to show turns
 * Make the game media responsive (currently fixed width and height)
 * Implement computer player logic
+* Allow player to choose to play as 'X' and 'O'
