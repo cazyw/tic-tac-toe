@@ -14,10 +14,13 @@
 
     <body>
         <h1>Tic Tac Toe</h1>
-        <div class="outcome">
-            <span>Player X : <span id="playerX">0</span></span>
-            <span id="outcome"></span>
-            <span>Player O : <span id="playerO">0</span></span>
+        <div class="outcome hide">
+            <span id="player1-text">Player 1 : </span><span id="player1">0</span>
+            
+            <span id="player2-text">Player 2 : </span><span id="player2">0</span>
+        </div>
+        <div class="intro">
+            
         </div>
         <div class="container-fluid board">
             <div class="row">
@@ -35,9 +38,11 @@
                 <div id="b7" class="col-xs-4 box" onclick="game(this)"></div>
                 <div id="b8" class="col-xs-4 box" onclick="game(this)"></div>
             </div>
+            <div class="playerChoose">Player 1 - play as <span id="chooseX" onclick="choosePiece(this)">X</span> or <span id="chooseY" onclick="choosePiece(this)">O</span></div>
+            <div class="displayWinner">Winner</div>
         </div>
         <div class="container-fluid buttons">
-            <button class="btn btn-warning clear" onclick="resetGame()">Clear</button>
+            <button class="btn btn-warning clear" onclick="resetGame()">Reset</button>
         </div>
         
         

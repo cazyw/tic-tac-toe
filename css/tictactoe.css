@@ -24,6 +24,21 @@ button.clear {
   justify-content: space-around;
 }
 
+.outcome .hide {
+  visibility: hidden;
+}
+
+.intro {
+  margin: auto auto;
+  height: 50px;
+  width: 500px;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .board {
   margin: 10px auto;
   padding: 10px;
@@ -40,8 +55,67 @@ button.clear {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  position: relative;
 }
+
+.playerChoose {
+  text-align: center;
+  font-size: 0.5em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  background-image: -moz-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  background-image: -o-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  background-image: radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  opacity: 1;
+  z-index: 10;
+  visibility: visible;
+  color: rgb(255, 255, 255);
+  -webkit-transition: all .25s ease;
+  -moz-transition: all .25s ease;
+  -ms-transition: all .25s ease;
+  transition: all .25s ease;
+  padding-top: 150px;
+}
+
+.displayWinner {
+  text-align: center;
+  font-size: 0.5em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  background-image: -moz-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  background-image: -o-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  background-image: radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  opacity: 0;
+  z-index: 0;
+  visibility: hidden;
+  color: rgb(255, 255, 255);
+  -webkit-transition: all .25s ease;
+  -moz-transition: all .25s ease;
+  -ms-transition: all .25s ease;
+  transition: all .25s ease;
+  padding-top: 150px;
+}
+
+.show.displayWinner {
+  opacity: 1;
+  z-index: 10;
+  visibility: visible;
+}
+
+.game.playerChoose {
+  opacity: 0;
+  z-index: 0;
+  visibility: hidden;
+}
+
 .row{
   margin: 0;
   padding: 0;
@@ -64,6 +138,9 @@ button.clear {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+#chooseX, #chooseY {
+  cursor: pointer;
 }
 
 #b0 {

@@ -1,8 +1,39 @@
-let turn = "X"
+let players = {
+  player1: 'X',
+  player2: 'O'
+}
+let turnPlayer = 1
 let board = ["", "", "", "", "", "", "", "", ""]
 let winner = ""
-let playable = true
+let playable = false
 let timer
+
+const playerTurn = () => {
+  document.getElementById(`player${turnPlayer}-text`).style.color = 'red'
+}
+
+const displayScores = () => {
+  document.getElementsByClassName('outcome')[0].classList.remove('hide')
+  document.getElementsByClassName('intro')[0].classList.add('hide')
+
+}
+
+const choosePiece = (event) => {
+  document.getElementsByClassName('playerChoose')[0].classList.add('game')
+  if (event.id === 'chooseX') {
+    players.player1 = 'X'
+    players.player2 = 'O'
+  } else {
+    players.player1 = 'O'
+    players.player2 = 'X'
+  }
+  document.getElementById(`player1-text`).innerHTML = `Player 1 (${players.player1}): `
+  document.getElementById(`player2-text`).innerHTML = `Player 2 (${players.player2}): `
+  console.log(`chose ${players.player1}`)
+  playerTurn()
+  displayScores()
+  playable = true
+}
 
 const colorWinner = (a, b, c) => {
   document.getElementById(`b${a}`).style.color = 'rgb(63, 191, 127)'
@@ -52,15 +83,30 @@ const calculate = () => {
     colorWinner(2, 4, 6)
   } 
   if (winner !== "") {
-    document.getElementById('outcome').innerHTML = `Winner: ${winner}`
-    document.getElementById(`player${winner}`).innerHTML = Number(document.getElementById(`player${winner}`).textContent) + 1
+    document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
+    document.getElementById(`player${turnPlayer}`).innerHTML = Number(document.getElementById(`player${turnPlayer}`).textContent) + 1
+    document.getElementsByClassName('displayWinner')[0].innerHTML = `Winner: Player ${turnPlayer}`
+    console.log(`winner: ${turnPlayer}`)
     playable = false
-    timer = setTimeout(clearBoard, 2000)
+    timer = setTimeout(displayOutcome, 500)
+    
   } else if (board.find(val => val === "") === undefined){
-    document.getElementById('outcome').innerHTML = `Draw`
+    document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
+    document.getElementsByClassName('displayWinner')[0].innerHTML = `Draw`
+    turnPlayer === 1 ? turnPlayer = 2 : turnPlayer = 1
     playable = false
-    timer = setTimeout(clearBoard, 2000)
+    timer = setTimeout(displayOutcome, 500)
+  } else {
+    turnPlayer === 1 ? turnPlayer = 2 : turnPlayer = 1
+    document.getElementById(`player${turnPlayer}-text`).style.color = 'red' 
+    playable = true
   }
+}
+
+const displayOutcome = () => {
+  document.getElementsByClassName('displayWinner')[0].classList.add('show')
+  clearTimeout(timer)
+  timer = setTimeout(clearBoard, 1500)
 }
 const clearBoard = () => {
   board = ["", "", "", "", "", "", "", "", ""]
@@ -68,24 +114,32 @@ const clearBoard = () => {
     document.getElementById(`b${i}`).innerHTML = ""
     document.getElementById(`b${i}`).style.color = 'rgba(255, 255, 255, 0.5)'
   }
+  document.getElementById(`player1-text`).style.color = 'black' 
+  document.getElementById(`player2-text`).style.color = 'black' 
+  document.getElementById(`player${turnPlayer}-text`).style.color = 'red'
   winner = ""
   playable = true
-  document.getElementById('outcome').innerHTML = ""
+  document.getElementsByClassName('displayWinner')[0].classList.remove('show')
   console.log('board cleared')
   clearTimeout(timer)
 }
 
 const resetGame = () => {
-  document.getElementById('playerX').innerHTML = 0
-  document.getElementById('playerO').innerHTML = 0
+  document.getElementById('player1').innerHTML = 0
+  document.getElementById('player2').innerHTML = 0
+  document.getElementsByClassName('outcome')[0].classList.add('hide')
+  document.getElementsByClassName('intro')[0].classList.remove('hide')
   clearBoard()
+  document.getElementsByClassName('playerChoose')[0].classList.remove('game')
+  playable = false
 }
 
 const markBoard = (event) => {
   if(playable && document.getElementById(event.id).innerHTML === ""){
-    document.getElementById(event.id).innerHTML = turn
-    board[Number(event.id[1])] = turn
-    turn === "X" ? turn = "O" : turn = "X"
+    document.getElementById(event.id).innerHTML = players[`player${turnPlayer}`]
+    board[Number(event.id[1])] = players[`player${turnPlayer}`]
+    document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
+    playable = false
     console.log(board)
     calculate()
   }
@@ -94,4 +148,9 @@ const markBoard = (event) => {
 const game = (event) => {
   console.log(event.id)
   markBoard(event)
+}
+
+const playGame = () => {
+  console.log("clicked")
+  document.getElementsByClassName('test')[0].classList.add('game')
 }
