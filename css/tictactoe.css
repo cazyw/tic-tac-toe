@@ -10,10 +10,10 @@ h1 {
 
 button.clear {
   border-radius: 0px;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
-.outcome {
+.turn, .outcome {
   margin: auto auto;
   height: 50px;
   width: 500px;
@@ -24,9 +24,7 @@ button.clear {
   justify-content: space-around;
 }
 
-.outcome .hide {
-  visibility: hidden;
-}
+
 
 .intro {
   margin: auto auto;
@@ -114,6 +112,20 @@ button.clear {
   opacity: 0;
   z-index: 0;
   visibility: hidden;
+}
+
+.playerChoice {
+  border: 2px solid rgba(255, 255, 255, 0);
+  padding: 5px 15px;
+}
+.playerChoice:hover {
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+.turnSign {
+  background-color: rgb(71, 241, 156);
+  color: rgb(255, 255, 255);
 }
 
 .row{

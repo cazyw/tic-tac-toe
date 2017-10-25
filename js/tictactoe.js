@@ -14,6 +14,7 @@ const playerTurn = () => {
 
 const displayScores = () => {
   document.getElementsByClassName('outcome')[0].classList.remove('hide')
+  document.getElementsByClassName('turn')[0].classList.remove('hide')
   document.getElementsByClassName('intro')[0].classList.add('hide')
 
 }
@@ -128,6 +129,7 @@ const resetGame = () => {
   document.getElementById('player1').innerHTML = 0
   document.getElementById('player2').innerHTML = 0
   document.getElementsByClassName('outcome')[0].classList.add('hide')
+  document.getElementsByClassName('turn')[0].classList.add('hide')
   document.getElementsByClassName('intro')[0].classList.remove('hide')
   clearBoard()
   document.getElementsByClassName('playerChoose')[0].classList.remove('game')
