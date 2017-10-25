@@ -45,6 +45,7 @@ button.clear {
   width: 500px;
   box-sizing: content-box;
   font-size: 10em;
+  color: rgba(255, 255, 255, 0.5);
   background-image: -webkit-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
   background-image: -moz-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
   background-image: -o-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
@@ -64,6 +65,7 @@ button.clear {
   top: 0;
   width: 100%;
   height: 100%;
+  color: rgba(255, 255, 255, 0.5);
   background-image: -webkit-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
   background-image: -moz-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
   background-image: -o-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
@@ -71,7 +73,6 @@ button.clear {
   opacity: 1;
   z-index: 10;
   visibility: visible;
-  color: rgb(255, 255, 255);
   -webkit-transition: all .25s ease;
   -moz-transition: all .25s ease;
   -ms-transition: all .25s ease;
@@ -124,8 +125,17 @@ button.clear {
 }
 
 .turnSign {
-  background-color: rgb(71, 241, 156);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
   color: rgb(255, 255, 255);
+  padding: 0px 20px;
+  margin-top: 50px;
+}
+
+.turnSign.show {
+  margin-top: 0px;
 }
 
 .row{
@@ -153,6 +163,13 @@ button.clear {
 }
 #chooseX, #chooseY {
   cursor: pointer;
+}
+#player1-sign {
+  background-color: rgba(62, 219, 141, 0.993);
+}
+
+#player2-sign {
+  background-color: rgb(241, 71, 71);
 }
 
 #b0 {

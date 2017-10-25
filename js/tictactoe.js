@@ -9,7 +9,9 @@ let playable = false
 let timer
 
 const playerTurn = () => {
+  clearTimeout(timer)
   document.getElementById(`player${turnPlayer}-text`).style.color = 'red'
+  document.getElementById(`player${turnPlayer}-sign`).classList.add('show');
 }
 
 const displayScores = () => {
@@ -31,7 +33,8 @@ const choosePiece = (event) => {
   document.getElementById(`player1-text`).innerHTML = `Player 1 (${players.player1}): `
   document.getElementById(`player2-text`).innerHTML = `Player 2 (${players.player2}): `
   console.log(`chose ${players.player1}`)
-  playerTurn()
+  timer = setTimeout(playerTurn, 500)
+  // playerTurn()
   displayScores()
   playable = true
 }
@@ -100,6 +103,7 @@ const calculate = () => {
   } else {
     turnPlayer === 1 ? turnPlayer = 2 : turnPlayer = 1
     document.getElementById(`player${turnPlayer}-text`).style.color = 'red' 
+    document.getElementById(`player${turnPlayer}-sign`).classList.add('show')
     playable = true
   }
 }
@@ -118,6 +122,7 @@ const clearBoard = () => {
   document.getElementById(`player1-text`).style.color = 'black' 
   document.getElementById(`player2-text`).style.color = 'black' 
   document.getElementById(`player${turnPlayer}-text`).style.color = 'red'
+  document.getElementById(`player${turnPlayer}-sign`).classList.add('show')
   winner = ""
   playable = true
   document.getElementsByClassName('displayWinner')[0].classList.remove('show')
@@ -140,6 +145,7 @@ const markBoard = (event) => {
   if(playable && document.getElementById(event.id).innerHTML === ""){
     document.getElementById(event.id).innerHTML = players[`player${turnPlayer}`]
     board[Number(event.id[1])] = players[`player${turnPlayer}`]
+    document.getElementById(`player${turnPlayer}-sign`).classList.remove('show')
     document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
     playable = false
     console.log(board)
