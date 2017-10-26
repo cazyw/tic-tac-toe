@@ -7,6 +7,10 @@ let board = ["", "", "", "", "", "", "", "", ""]
 let winner = ""
 let playable = false
 let timer
+let playerNo = 1;
+
+
+
 
 const playerTurn = () => {
   clearTimeout(timer)
@@ -45,51 +49,79 @@ const colorWinner = (a, b, c) => {
   document.getElementById(`b${c}`).style.color = 'rgb(63, 191, 127)'
 }
 
-const calculate = () => {
+const checkWinner = (board) => {
   if (board[0] === board[1] && board[1] === board[2] && board[1] != ""){
-    console.log('row 1')
-    winner = board[0]
-    colorWinner(0, 1, 2)
+    console.log('row 1');
+    // winner = board[0];
+    // colorWinner(0, 1, 2);
+    return [0, 1, 2];
   }
   if (board[3] === board[4] && board[4] === board[5] && board[4] != ""){
     console.log('row 2')
-    winner = board[3]
-    colorWinner(3, 4, 5)
+    // winner = board[3]
+    // colorWinner(3, 4, 5)
+    return [3, 4, 5];
   }
   if (board[6] === board[7] && board[7] === board[8] && board[7] != ""){
     console.log('row 3')
-    winner = board[6]
-    colorWinner(6, 7, 8)
+    // winner = board[6]
+    // colorWinner(6, 7, 8)
+    return [6, 7, 8];
   }
   if (board[0] === board[3] && board[3] === board[6] && board[3] != ""){
     console.log('col 1')
-    winner = board[0]
-    colorWinner(0, 3, 6)
+    // winner = board[0]
+    // colorWinner(0, 3, 6)
+    return [0, 3, 6];
   }
   if (board[1] === board[4] && board[4] === board[7] && board[4] != ""){
     console.log('col 2')
-    winner = board[1]
-    colorWinner(1, 4, 7)
+    // winner = board[1]
+    // colorWinner(1, 4, 7)
+    return [1, 4, 7];
   }
   if (board[2] === board[5] && board[5] === board[8] && board[5] != ""){
     console.log('col 3')
-    winner = board[2]
-    colorWinner(2, 5, 8)
+    // winner = board[2]
+    // colorWinner(2, 5, 8)
+    return [2, 5, 8];
   }
   if (board[0] === board[4] && board[4] === board[8] && board[4] != ""){
     console.log('diag lr')
-    winner = board[0]
-    colorWinner(0, 4, 8)
+    // winner = board[0]
+    // colorWinner(0, 4, 8)
+    return [0, 4, 8];
   }
   if (board[2] === board[4] && board[4] === board[6] && board[4] != ""){
     console.log('diag rl')
-    winner = board[2]
-    colorWinner(2, 4, 6)
+    // winner = board[2]
+    // colorWinner(2, 4, 6)
+    return [2, 4, 6];
   } 
-  if (winner !== "") {
+  return false;
+}
+
+const computerPlays = () => {
+  clearTimeout(timer);
+  let piece = compMove(board);
+  document.getElementById(`b${piece}`).innerHTML = players[`player${turnPlayer}`]
+  board[piece] = players[`player${turnPlayer}`]
+  document.getElementById(`player${turnPlayer}-sign`).classList.remove('show')
+  document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
+  playable = false
+  console.log(board)
+  calculate()
+
+}
+
+const calculate = (piece) => {
+  let arr = checkWinner(board);
+  if (arr) {
+    winner = arr[0];
+    colorWinner(arr[0], arr[1], arr[2]);
     document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
     document.getElementById(`player${turnPlayer}`).innerHTML = Number(document.getElementById(`player${turnPlayer}`).textContent) + 1
-    document.getElementsByClassName('displayWinner')[0].innerHTML = `Winner: Player ${turnPlayer}`
+    document.getElementsByClassName('displayWinner')[0].innerHTML = `Winner:<br/> Player ${turnPlayer}`
     console.log(`winner: ${turnPlayer}`)
     playable = false
     timer = setTimeout(displayOutcome, 500)
@@ -104,7 +136,12 @@ const calculate = () => {
     turnPlayer === 1 ? turnPlayer = 2 : turnPlayer = 1
     document.getElementById(`player${turnPlayer}-text`).style.color = 'red' 
     document.getElementById(`player${turnPlayer}-sign`).classList.add('show')
-    playable = true
+    if (playerNo === 2 || turnPlayer === 1){
+      playable = true
+    } else {
+      console.log("playing computer");
+      timer = setInterval(computerPlays, 2000);
+    }
   }
 }
 
@@ -124,20 +161,29 @@ const clearBoard = () => {
   document.getElementById(`player${turnPlayer}-text`).style.color = 'red'
   document.getElementById(`player${turnPlayer}-sign`).classList.add('show')
   winner = ""
-  playable = true
+  if (turnPlayer === 1 || playerNo === 2) {
+    playable = true;
+  }
   document.getElementsByClassName('displayWinner')[0].classList.remove('show')
   console.log('board cleared')
   clearTimeout(timer)
+  if (playerNo === 1 && turnPlayer === 2){
+    timer = setInterval(computerPlays, 2000);
+  }
 }
 
 const resetGame = () => {
+  clearInterval(timer);
+  clearTimeout(timer);
   document.getElementById('player1').innerHTML = 0
   document.getElementById('player2').innerHTML = 0
   document.getElementsByClassName('outcome')[0].classList.add('hide')
   document.getElementsByClassName('turn')[0].classList.add('hide')
   document.getElementsByClassName('intro')[0].classList.remove('hide')
-  clearBoard()
   document.getElementsByClassName('playerChoose')[0].classList.remove('game')
+  clearBoard()
+  document.getElementById(`player${turnPlayer}-sign`).classList.remove('show')
+  turnPlayer = 1;
   playable = false
 }
 
@@ -149,7 +195,7 @@ const markBoard = (event) => {
     document.getElementById(`player${turnPlayer}-text`).style.color = 'black' 
     playable = false
     console.log(board)
-    calculate()
+    calculate(Number(event.id[1]));
   }
 }
 
@@ -162,3 +208,171 @@ const playGame = () => {
   console.log("clicked")
   document.getElementsByClassName('test')[0].classList.add('game')
 }
+
+
+// let board = ["", "", "", "", "", "", "", "", ""]
+
+boards = [["X", "", "", "", "", "", "", "", ""],
+["X", "X", "", "", "", "", "", "", ""],
+["X", "", "X", "", "", "", "", "", ""],
+["X", "", "", "X", "", "", "", "", ""],
+["X", "", "", "", "X", "", "", "", ""],
+["X", "", "", "", "", "X", "", "", ""],
+["X", "", "", "", "", "", "X", "", ""],
+["X", "", "", "", "", "", "", "X", "X"],
+["", "X", "", "", "", "", "", "X", ""],
+["", "", "X", "", "", "", "X", "", ""],
+["", "X", "", "", "", "X", "", "", ""],
+["", "", "X", "", "", "", "", "", "X"],
+["", "", "", "X", "", "X", "", "", ""],
+["", "", "", "", "X", "X", "", "", ""],
+["", "", "", "", "X", "", "", "", ""],
+["O", "", "O", "", "X", "", "O", "", "O"],
+["O", "", "", "", "", "", "O", "", "O"],
+["O", "X", "", "", "O", "", "", "", "X"],
+["X", "O", "", "", "X", "", "", "", "O"]]
+
+const checkPendingDoom = (testBoard, i, m) => {
+  testBoard[i] = m;
+  console.log("checking board ", testBoard);
+  if (checkWinner(testBoard)) {
+    return true;
+  } 
+}
+
+const checkPendingFork = (forkBoard, m) => {
+  console.log("fork board ", forkBoard);
+  let countPossWins = 0;
+  for (let i = 0; i < 9; i++) {
+    let testBoard = [].concat(forkBoard);
+    if (testBoard[i] === '' && checkPendingDoom(testBoard, i, m)){
+      countPossWins += 1;
+    }
+  }
+  console.log("poss wins: " + countPossWins);
+  return countPossWins > 1;
+}
+
+const randomiseArray = (arr) => {
+  if (arr.length === 1) return arr;
+  let i = Math.floor(Math.random() * (arr.length));
+  let res = [];
+  res.push(arr.splice(i, 1))
+  return res.concat(randomiseArray(arr));
+}
+
+const compMove = (board) => {
+  var compPiece = players.player2;
+  console.log("COMPUTER: ", players.player2);
+  var playerPiece = 'X'
+  compPiece === 'X' ? playerPiece = 'O' : playerPiece = 'X'; 
+  console.log('Board: ', board);
+
+  // test if computer can win 
+  console.log('Checking if computer has winning piece');
+  
+  for (let i = 0; i < 9; i++) {
+    let testBoard = [].concat(board)
+    if (testBoard[i] === '') {
+      testBoard[i] = compPiece;
+      if (checkWinner(testBoard)){
+        console.log('COMPUTER WINS ==> ', testBoard);
+        return i;
+      }
+    } 
+  }
+
+  // test if other player could win on their next move
+  console.log('checking if player has a winning piece')
+  
+  for (let i = 0; i < 9; i++) {
+    let testBoard = [].concat(board)
+    if (testBoard[i] === '' && checkPendingDoom(testBoard, i, playerPiece)){
+      console.log('TRUE ==> ', testBoard);
+      return i;
+    }
+  }
+  
+  console.log('checking if special case')
+  // checking for the special case
+  v1 = [`${playerPiece}`, "", "", "", `${compPiece}`, "", "", "", `${playerPiece}`];
+  v2 = ["", "", `${playerPiece}`, "", `${compPiece}`, "", `${playerPiece}`, "", ""];
+  console.log(board, v1, v2);
+  let same = true;
+  for (let i = 0; i < 9 ; i++) {
+    if (board[i] !== v1[i]) {
+      same = false;
+      break;
+    }
+  }
+  if (same) {
+    console.log("SPECIAL")
+    return randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
+  }
+  same = true;
+  for (let i = 0; i < 9 ; i++) {
+    if (board[i] !== v2[i]) {
+      same = false;
+      break;
+    }
+  }
+  if (same) {
+    console.log("SPECIAL")
+    return randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
+  }
+  
+  console.log('checking if computer can fork')
+  // test if we can win two moves ahead
+  for (let i = 0; i < 9; i++) {
+    let testBoard = [].concat(board)
+    if (testBoard[i] === '') {
+      testBoard[i] = compPiece;
+      if (checkPendingFork(testBoard, compPiece)){
+        console.log('computer FORK ' + i);
+        return i;
+      }
+    }
+  }
+  
+  console.log('checking if player can fork')
+  // test if other player could win two moves ahead
+  for (let i = 0; i < 9; i++) {
+    let testBoard = [].concat(board)
+    if (testBoard[i] === '') {
+      testBoard[i] = playerPiece;
+      if (checkPendingFork(testBoard, playerPiece)){
+        console.log('PENDING FORK ' + i);
+        return i;
+      }
+    }
+  }
+  
+  console.log('checking center')
+  // test for centre square
+  if (board[4] === '') {
+    console.log('CENTER');
+    return 4;
+  }
+  
+  console.log('checking corners')
+  // test for corners
+  let corner = randomiseArray([0, 2, 6, 8]).find(sq => board[sq] === '');
+  console.log(corner);
+  if (corner !== undefined) {
+    console.log('CORNER ' + corner);
+    return corner;
+  }
+  
+  console.log('checking sides')
+  // test for sides
+  // [1, 3, 5, 7].findIndex(sq => sq === '')
+  let side = randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
+  if (side !== undefined) {
+    console.log('SIDE ' + side);
+    return side;
+  }
+}
+
+// boards.forEach((board) => {
+//   compMove(board);
+// })
