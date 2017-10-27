@@ -1,15 +1,28 @@
-let players = {
-  player1: 'X',
-  player2: 'O'
+// let players = {
+//   player1: 'X',
+//   player2: 'O'
+// }
+// let turnPlayer = 1
+// let board = ["", "", "", "", "", "", "", "", ""]
+// let winner = ""
+// let playable = false
+var timer
+var tictactoe
+// let playerNo = 1;
+
+class Game {
+  constructor() {
+    this.players = {
+      player1: 'X',
+      player2: 'O'
+    };
+    this.board = ["", "", "", "", "", "", "", "", ""];
+    this.noPlayers = 1;
+    this.playerTurn = 1;
+    this.playable = false;
+    this.winner = "";
+  }
 }
-let turnPlayer = 1
-let board = ["", "", "", "", "", "", "", "", ""]
-let winner = ""
-let playable = false
-let timer
-let playerNo = 1;
-
-
 
 
 const playerTurn = () => {
@@ -25,23 +38,7 @@ const displayScores = () => {
 
 }
 
-const choosePiece = (event) => {
-  document.getElementsByClassName('playerChoose')[0].classList.add('game')
-  if (event.id === 'chooseX') {
-    players.player1 = 'X'
-    players.player2 = 'O'
-  } else {
-    players.player1 = 'O'
-    players.player2 = 'X'
-  }
-  document.getElementById(`player1-text`).innerHTML = `Player 1 (${players.player1}): `
-  document.getElementById(`player2-text`).innerHTML = `Player 2 (${players.player2}): `
-  console.log(`chose ${players.player1}`)
-  timer = setTimeout(playerTurn, 500)
-  // playerTurn()
-  displayScores()
-  playable = true
-}
+
 
 const colorWinner = (a, b, c) => {
   document.getElementById(`b${a}`).style.color = 'rgb(63, 191, 127)'
@@ -188,7 +185,7 @@ const resetGame = () => {
 }
 
 const markBoard = (event) => {
-  if(playable && document.getElementById(event.id).innerHTML === ""){
+  if(tictactoe.playable && document.getElementById(event.id).innerHTML === ""){
     document.getElementById(event.id).innerHTML = players[`player${turnPlayer}`]
     board[Number(event.id[1])] = players[`player${turnPlayer}`]
     document.getElementById(`player${turnPlayer}-sign`).classList.remove('show')
@@ -204,33 +201,33 @@ const game = (event) => {
   markBoard(event)
 }
 
-const playGame = () => {
-  console.log("clicked")
-  document.getElementsByClassName('test')[0].classList.add('game')
-}
+// const playGame = () => {
+//   console.log("clicked")
+//   document.getElementsByClassName('test')[0].classList.add('game')
+// }
 
 
 // let board = ["", "", "", "", "", "", "", "", ""]
 
-boards = [["X", "", "", "", "", "", "", "", ""],
-["X", "X", "", "", "", "", "", "", ""],
-["X", "", "X", "", "", "", "", "", ""],
-["X", "", "", "X", "", "", "", "", ""],
-["X", "", "", "", "X", "", "", "", ""],
-["X", "", "", "", "", "X", "", "", ""],
-["X", "", "", "", "", "", "X", "", ""],
-["X", "", "", "", "", "", "", "X", "X"],
-["", "X", "", "", "", "", "", "X", ""],
-["", "", "X", "", "", "", "X", "", ""],
-["", "X", "", "", "", "X", "", "", ""],
-["", "", "X", "", "", "", "", "", "X"],
-["", "", "", "X", "", "X", "", "", ""],
-["", "", "", "", "X", "X", "", "", ""],
-["", "", "", "", "X", "", "", "", ""],
-["O", "", "O", "", "X", "", "O", "", "O"],
-["O", "", "", "", "", "", "O", "", "O"],
-["O", "X", "", "", "O", "", "", "", "X"],
-["X", "O", "", "", "X", "", "", "", "O"]]
+// boards = [["X", "", "", "", "", "", "", "", ""],
+// ["X", "X", "", "", "", "", "", "", ""],
+// ["X", "", "X", "", "", "", "", "", ""],
+// ["X", "", "", "X", "", "", "", "", ""],
+// ["X", "", "", "", "X", "", "", "", ""],
+// ["X", "", "", "", "", "X", "", "", ""],
+// ["X", "", "", "", "", "", "X", "", ""],
+// ["X", "", "", "", "", "", "", "X", "X"],
+// ["", "X", "", "", "", "", "", "X", ""],
+// ["", "", "X", "", "", "", "X", "", ""],
+// ["", "X", "", "", "", "X", "", "", ""],
+// ["", "", "X", "", "", "", "", "", "X"],
+// ["", "", "", "X", "", "X", "", "", ""],
+// ["", "", "", "", "X", "X", "", "", ""],
+// ["", "", "", "", "X", "", "", "", ""],
+// ["O", "", "O", "", "X", "", "O", "", "O"],
+// ["O", "", "", "", "", "", "O", "", "O"],
+// ["O", "X", "", "", "O", "", "", "", "X"],
+// ["X", "O", "", "", "X", "", "", "", "O"]]
 
 const checkPendingDoom = (testBoard, i, m) => {
   testBoard[i] = m;
@@ -376,3 +373,60 @@ const compMove = (board) => {
 // boards.forEach((board) => {
 //   compMove(board);
 // })
+
+const toggleTurns = () => {
+
+}
+
+// the game is now set and playable
+const startGame = () => {
+  tictactoe.playable = true;
+  removedClass('turn', 'hide');
+  removedClass('outcome', 'hide');
+  addedClass('intro', 'hide');
+  timer = setTimeout(addedClass, 500, `player${tictactoe.playerTurn}-sign`, 'show');
+  console.log(tictactoe);
+}
+
+// these two functions are needed to show/hide screens
+const addedClass = (el, cl) => {
+  clearTimeout(timer);
+  document.getElementById(el).classList.add(cl);
+}
+
+const removedClass = (el, cl) => {
+  clearTimeout(timer);
+  document.getElementById(el).classList.remove(cl);
+}
+
+// add the grid outline
+const addBoxes = (boxes, cl) => {
+  clearTimeout(timer);
+  [].forEach.call(document.getElementsByClassName(boxes), box => box.classList.add(cl));
+  console.log('set the board');
+  startGame();
+}
+
+// set the players' pieces (X or O)
+const setPlayerPiece = (event) => {
+  let piece = event.id.charAt(event.id.length-1);
+  tictactoe.players.player1 = piece;
+  piece === 'X' ? tictactoe.players.player2 = 'O' : tictactoe.players.player2 = 'X'; 
+  console.log(tictactoe.players.player1, tictactoe.players.player2);
+  removedClass('playerChoose', 'show');
+  timer = setTimeout(addBoxes, 1000, 'box', 'show');
+}
+
+// set the number of players (1 or 2)
+const setPlayerNumber = (event) => {
+  setupGame();
+  tictactoe.noPlayers = Number(event.id.charAt(event.id.length-1));
+  console.log(tictactoe.noPlayers);
+  removedClass('playerNumber', 'show');
+  timer = setTimeout(addedClass, 1000, 'playerChoose', 'show');
+}
+
+// create the game object
+const setupGame = () => {
+  tictactoe = new Game;
+}
