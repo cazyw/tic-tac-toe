@@ -18,13 +18,17 @@ button.clear {
   height: 50px;
   width: 500px;
   text-align: center;
-  font-size: 2em;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  font-size: 1.5em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
 }
 
-
+.playerScores {
+  padding: 10px 30px;
+}
 
 .intro {
   margin: auto auto;
@@ -61,7 +65,7 @@ button.clear {
 
 
 
-.playerChoose, .playerNumber {
+.playerPiece, .playerNumber {
   opacity: 0;
   -webkit-transition: opacity 0.5s ease;
   -moz-transition: opacity 0.5s ease;
@@ -83,7 +87,7 @@ button.clear {
   padding: 70px 30px;
 }
 
-.playerChoose.show, .playerNumber.show {
+.playerPiece.show, .playerNumber.show {
   opacity: 1;
   z-index: 10;
 }
@@ -119,14 +123,20 @@ button.clear {
 }
 
 
-.playerChoice {
+.playerPiece {
   border: 2px solid rgba(255, 255, 255, 0);
-  padding: 5px 15px;
-  cursor: pointer;
+  padding: 100px 15px;
 }
+
+.playerChoice {
+  border: 2px dashed rgba(255, 255, 255, 0.0);
+  padding: 0px 20px;
+}
+
 .playerChoice:hover {
   border: 2px dashed rgba(255, 255, 255, 0.5);
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .turnSign {
@@ -137,6 +147,7 @@ button.clear {
   color: rgb(255, 255, 255);
   padding: 0px 20px;
   margin-top: 50px;
+  line-height: 50px;
 }
 
 .turnSign.show {
@@ -153,11 +164,11 @@ button.clear {
   opacity: 0;
   height: 130px;
   width: 130px;
-  padding: 0;
-  margin: 0;
+  padding: auto auto;
+  margin: auto auto;
   z-index: 0;
   cursor: pointer;
-  display: flex;
+  display: flex!important;
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.5);
@@ -173,14 +184,16 @@ button.clear {
 }
 
 
+
 .buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  font-family: 'Raleway', sans-serif;
 }
-#chooseX, #chooseY {
+/* #chooseX, #chooseY {
   cursor: pointer;
-}
+} */
 #player1-sign {
   background-color: rgba(62, 219, 141, 0.993);
 }
