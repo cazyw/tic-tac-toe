@@ -191,7 +191,7 @@ button.clear {
   -moz-transition: all .25s ease;
   -ms-transition: all .25s ease;
   transition: all .25s ease;
-  padding-top: 100px;
+  padding: 100px 30px;
 }
 
 .show.displayWinner {

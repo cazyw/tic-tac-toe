@@ -9,7 +9,7 @@ Build an app that is functionally similar to this: https://codepen.io/FreeCodeCa
 
 ## Operating Instructions
 
-<img src="" width="450" alt="">
+<img src="https://cazyw.github.io/img/js-tictactoe.jpg" width="450" alt="Tic Tac Toe">
 
 The gameplay:
 1. Choose to play against the computer or against another person
