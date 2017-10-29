@@ -8,7 +8,7 @@
         <title>Tic Tac Toe</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Raleway:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Architects+Daughter|Raleway:400,700" rel="stylesheet">
         <link href="css\tictactoe.css" rel="stylesheet">
     </head>
 
@@ -18,8 +18,7 @@
             <span id="player1-sign" class="turnSign player1-sign">Player 1's Turn</span>
             <span id="player2-sign" class="turnSign player2-sign">Player 2's Turn</span>
         </div>
-        <div id="intro" class="intro">
-            
+        <div id="intro" class="intro"></div>
         </div>
         <div class="container-fluid board">
             <div class="row">
@@ -49,6 +48,9 @@
                 <span id="chooseX" class="playerChoice" onclick="setPlayerPiece(this)">X</span> 
                 or 
                 <span id="chooseO" class="playerChoice" onclick="setPlayerPiece(this)">O</span>
+                <br/> <br/> 
+                <div id="back" onclick="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </div>
             </div>
             <div class="displayWinner">Winner</div>
         </div>
@@ -64,7 +66,6 @@
             </div>
         </div>
         <div class="intro">
-            
         </div>
         
         

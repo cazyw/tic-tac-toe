@@ -1,17 +1,35 @@
 body {
   font-family: 'Indie Flower', cursive;
-
 }
 
 h1 {
   text-align: center;
   font-size: 4em;
+  font-family: 'Architects Daughter', cursive;
 }
 
 button.clear {
   border-radius: 0px;
   font-size: 1em;
 }
+
+/* Flags that show whose turn it is */
+.turnSign {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+  color: rgb(255, 255, 255);
+  padding: 0px 20px;
+  margin-top: 50px;
+  line-height: 50px;
+}
+
+.turnSign.show {
+  margin-top: 0px;
+}
+
+/* THe two sections above and below the main board */
 
 .turn, .outcome {
   margin: auto auto;
@@ -26,9 +44,7 @@ button.clear {
   font-weight: 700;
 }
 
-.playerScores {
-  padding: 10px 30px;
-}
+/* Space placeholder above the main board */
 
 .intro {
   margin: auto auto;
@@ -36,10 +52,23 @@ button.clear {
   width: 500px;
   text-align: center;
   font-size: 2em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
+
+#back {
+  font-size: 0.5em;
+  cursor: pointer;
+}
+
+.back {
+  cursor: pointer;
+}
+
+/* Game board */
 
 .board {
   margin: 0px auto;
@@ -56,6 +85,10 @@ button.clear {
   background-image: -moz-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
   background-image: -o-radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
   background-image: radial-gradient(rgb(42,83,73) 0%,rgb(19, 29, 19) 100%);
+  -webkit-box-shadow: 5px 5px 15px rgb(0, 0, 0);
+  -moz-box-shadow: 5px 5px 15px rgb(0, 0, 0);
+  -o-box-shadow: 5px 5px 15px rgb(0, 0, 0);
+  box-shadow: 5px 5px 15px rgb(0, 0, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +96,35 @@ button.clear {
   position: relative;
 }
 
+.row{
+  margin: 0;
+  padding: 0;
+}
+.box {
+  opacity: 0;
+  height: 130px;
+  width: 130px;
+  padding: auto auto;
+  margin: auto auto;
+  z-index: 0;
+  cursor: pointer;
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
 
+.box.show {
+  opacity: 1;
+  z-index: 10;
+}
+
+
+/* Menu screens to pick number of players and piece */
 
 .playerPiece, .playerNumber {
   opacity: 0;
@@ -92,6 +153,23 @@ button.clear {
   z-index: 10;
 }
 
+.playerPiece {
+  border: 2px solid rgba(255, 255, 255, 0.0);
+  padding: 100px 15px;
+}
+
+.playerChoice {
+  border: 2px dashed rgba(255, 255, 255, 0.0);
+  padding: 0px 20px;
+}
+
+.playerChoice:hover {
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+/* Display the winner */
 
 .displayWinner {
   text-align: center;
@@ -122,68 +200,11 @@ button.clear {
   visibility: visible;
 }
 
+/* Outcome displayed below the main board */
 
-.playerPiece {
-  border: 2px solid rgba(255, 255, 255, 0);
-  padding: 100px 15px;
+.playerScores {
+  padding: 10px 30px;
 }
-
-.playerChoice {
-  border: 2px dashed rgba(255, 255, 255, 0.0);
-  padding: 0px 20px;
-}
-
-.playerChoice:hover {
-  border: 2px dashed rgba(255, 255, 255, 0.5);
-  border-radius: 50px;
-  cursor: pointer;
-}
-
-.turnSign {
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  transition: all 1s ease;
-  color: rgb(255, 255, 255);
-  padding: 0px 20px;
-  margin-top: 50px;
-  line-height: 50px;
-}
-
-.turnSign.show {
-  margin-top: 0px;
-}
-
-.row{
-  margin: 0;
-  padding: 0;
-}
-.box {
-  /* height: 175px;
-  width: 175px; */
-  opacity: 0;
-  height: 130px;
-  width: 130px;
-  padding: auto auto;
-  margin: auto auto;
-  z-index: 0;
-  cursor: pointer;
-  display: flex!important;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
-  -webkit-transition: opacity 0.5s ease;
-  -moz-transition: opacity 0.5s ease;
-  -ms-transition: opacity 0.5s ease;
-  transition: opacity 0.5s ease;
-}
-
-.box.show {
-  opacity: 1;
-  z-index: 10;
-}
-
-
 
 .buttons {
   display: flex;
@@ -191,9 +212,7 @@ button.clear {
   justify-content: center;
   font-family: 'Raleway', sans-serif;
 }
-/* #chooseX, #chooseY {
-  cursor: pointer;
-} */
+
 #player1-sign {
   background-color: rgba(62, 219, 141, 0.993);
 }
@@ -243,4 +262,55 @@ button.clear {
 #b8.show {
   border-left: 3px solid rgba(255, 255, 255, 0.5);
   border-top: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+#back {
+  font-size: 0.5em;
+  cursor: pointer;
+}
+
+@media (max-width: 540px) {
+  h1 {
+    font-size: 2em;
+  }
+  .board {
+    border: 15px solid rgba(218, 127, 48, 0.733);
+    border-radius: 10px;
+    height: 300px;
+    width: 300px;
+    font-size: 7em;
+    -webkit-box-shadow: 0 0 15px rgb(0, 0, 0);
+    -moz-box-shadow: 0 0 15px rgb(0, 0, 0);
+    -o-box-shadow: 0 0 15px rgb(0, 0, 0);
+    box-shadow: 0 0 15px rgb(0, 0, 0);
+  }
+
+  .box {
+    height: 100px;
+    width: 100px;
+  }
+
+  .playerPiece {
+    padding: 70px 30px;
+  }
+
+  .turn, .outcome, .intro {
+    width: 300px;
+    height: 40px;
+    font-size: 1em;
+  }
+
+  .turnSign {
+    padding: 0px 10px;
+    margin-top: 40px;
+    line-height: 40px;
+  }
+
+  .playerScores {
+    padding: 10px 10px;
+  }
+
+  .displayWinner {
+    padding-top: 80px;
+  }
 }

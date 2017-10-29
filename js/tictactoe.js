@@ -384,3 +384,8 @@ const setPlayerNumber = (event) => {
 const setupGame = () => {
   tictactoe = new Game;
 }
+
+const back = () => {
+  removedClass('playerPiece', 'show');
+  addedClass('playerNumber', 'show');
+}
