@@ -45,8 +45,7 @@ The computer logic is as follows. The computer will select the spot (being empty
 6. is in a corner
 7. is in a side
 
-There are two special cases also accounted for:
+There are also a special case also accounted for:
 1. there's a special 'fork' situation involving diagonals. The computer will choose a side slot rather than the usual corner.
-2. there's an odd situation where the computer will select a corner which is a no-win move rather than a side spot which is a possible win move
 
 Where a corner or side is chosen, a randomise function will pick a random spot (so empty spots are not selected in the same order). It was fun using recursion to write this program.

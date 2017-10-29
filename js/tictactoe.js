@@ -154,31 +154,17 @@ const compMove = (board) => {
   if (board[4] === '') {
     return 4;
   }
-
-  let b = tictactoe.board;
-  let side = randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
-  
-  if (
-    (
-      (b[0] === playerPiece && 
-        (b[2] === playerPiece || b[6] === playerPiece)
-      ) ||
-      (b[8] === playerPiece && 
-        (b[2] === playerPiece || b[6] === playerPiece)
-      )
-    ) && side !== undefined) {
-      return side;
-    }
     
-    // test for corners
+  // test for corners
   let corner = randomiseArray([0, 2, 6, 8]).find(sq => board[sq] === '');
   if (corner !== undefined) {
     return corner;
   }
   
   // test for sides
+  let side = randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
   if (side !== undefined) {
-    return side;
+  return side;
   }
 }
 
