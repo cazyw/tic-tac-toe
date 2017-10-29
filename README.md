@@ -45,6 +45,9 @@ The computer logic is as follows. The computer will select the spot (being empty
 6. is in a corner
 7. is in a side
 
+<img src="https://cazyw.github.io/ticTacToe/img/js-tictactoe.jpg" width="450" alt="Tic Tac Toe Fork">
+
+
 There are also a special case also accounted for:
 1. there's a special 'fork' situation involving diagonals. The computer will choose a side slot rather than the usual corner.
 
