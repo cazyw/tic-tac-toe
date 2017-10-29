@@ -154,15 +154,29 @@ const compMove = (board) => {
   if (board[4] === '') {
     return 4;
   }
+
+  let b = tictactoe.board;
+  let side = randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
   
-  // test for corners
+  if (
+    (
+      (b[0] === playerPiece && 
+        (b[2] === playerPiece || b[6] === playerPiece)
+      ) ||
+      (b[8] === playerPiece && 
+        (b[2] === playerPiece || b[6] === playerPiece)
+      )
+    ) && side !== undefined) {
+      return side;
+    }
+    
+    // test for corners
   let corner = randomiseArray([0, 2, 6, 8]).find(sq => board[sq] === '');
   if (corner !== undefined) {
     return corner;
   }
   
   // test for sides
-  let side = randomiseArray([1, 3, 5, 7]).find(sq => board[sq] === '');
   if (side !== undefined) {
     return side;
   }
@@ -223,7 +237,6 @@ const toggleTurns = () => {
   removedClass(`player${currentP}-sign`, 'show');
   addedClass(`player${nextP}-sign`, 'show');
   tictactoe.playerTurn = nextP;
-  // console.log(`toggled, it's now player ${nextP} turn`);
   return nextP;
 }
 
@@ -241,7 +254,7 @@ const displayOutcome = (outcome) => {
       }
       break;
     case 'draw':
-      document.getElementsByClassName('displayWinner')[0].innerHTML = `Draw`;
+      document.getElementsByClassName('displayWinner')[0].innerHTML = `Well played but it's a Draw`;
       break;
     default:
       console.log('error in display outcome switch');
@@ -289,7 +302,6 @@ const calculateStatus = () => {
 
   } else if (tictactoe.board.find(val => val === "") === undefined) {
     // it's a draw
-    console.log("It's a DRAW");
     timer = setTimeout(() => {
       displayOutcome('draw');
       setTimeout(() => {
