@@ -45,7 +45,9 @@ The computer logic is as follows. The computer will select the spot (being empty
 6. is in a corner
 7. is in a side
 
-<img src="https://cazyw.github.io/ticTacToe/img/js-tictactoe.jpg" width="450" alt="Tic Tac Toe Fork">
+This shows a fork. The computer ('O') has placed a piece that creates two winning scenarios. Player 1 ('X') can block one, but ultimately the computer will win on their next move.
+
+<img src="https://cazyw.github.io/ticTacToe/img/js-tictactoe-fork.jpg" width="450" alt="Tic Tac Toe Fork">
 
 
 There are also a special case also accounted for:
