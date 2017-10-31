@@ -170,11 +170,12 @@ const compMove = (board) => {
 
 // computer plays the game;
 const computerPlays = () => {
+  tictactoe.playable = false;
   clearTimeout(timer);
   let piece = compMove(tictactoe.board);
   var temp = document.createElement('div');
   temp.id = `b${piece}`;
-  markBox(temp);
+  markBoard(temp.id);
 }
 
 // resets the game, doesn't reset the game object values
@@ -186,9 +187,11 @@ const resetGame = () => {
   addedClass('outcome', 'hide'); // hide the scores box
   addedClass('turn', 'hide'); // hide the player turn box
   removedClass('intro', 'hide'); // show the intro box
+
   removedClass('playerPiece', 'show'); 
   addedClass('playerNumber', 'show'); // show screen to pick no. players
   clearBoard();
+  removedClass('box', 'show');
   tictactoe.playable = false;
 }
 
@@ -211,7 +214,7 @@ const clearBoard = () => {
     } else {
       tictactoe.playable = true;
     }
-  }, 500);
+  }, 1500);
   
 }
 
@@ -240,7 +243,7 @@ const displayOutcome = (outcome) => {
       }
       break;
     case 'draw':
-      document.getElementsByClassName('displayWinner')[0].innerHTML = `Well played but it's a Draw`;
+      document.getElementsByClassName('displayWinner')[0].innerHTML = `Well played - Draw`;
       break;
     default:
       console.log('error in display outcome switch');
@@ -289,9 +292,10 @@ const calculateStatus = () => {
   } else if (tictactoe.board.find(val => val === "") === undefined) {
     // it's a draw
     timer = setTimeout(() => {
+      removedClass('box', 'show');
       displayOutcome('draw');
+      toggleTurns();
       setTimeout(() => {
-        toggleTurns();
         clearBoard();
       }, 1500);
     }, 1000);
@@ -317,14 +321,16 @@ const boxEmpty = (box) => {
 const markBoard = (box) => {
   document.getElementById(box).innerHTML = tictactoe.players[`player${tictactoe.playerTurn}`]
   tictactoe.board[Number(box[1])] = tictactoe.players[`player${tictactoe.playerTurn}`]
+  calculateStatus();
 }
 
 // player has selected a box
 const markBox = (event) => {
-  if (boxEmpty(event.id)) {
+  console.log(tictactoe.playable, tictactoe.noPlayers, tictactoe.playerTurn);
+  
+  if (boxEmpty(event.id) && tictactoe.playable === true) {
     tictactoe.playable = false;
     markBoard(event.id);
-    calculateStatus();
   }
 }
 
