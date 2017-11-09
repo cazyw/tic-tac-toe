@@ -1,5 +1,8 @@
 body {
   font-family: 'Indie Flower', cursive;
+  background: url('../img/wall.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1 {
