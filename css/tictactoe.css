@@ -1,8 +1,6 @@
 body {
   font-family: 'Indie Flower', cursive;
-  background: url('../img/wall.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: rgb(128, 128, 128);
 }
 
 h1 {
@@ -32,7 +30,7 @@ button.clear {
   margin-top: 0px;
 }
 
-/* THe two sections above and below the main board */
+/* The two sections above and below the main board */
 
 .turn, .outcome {
   margin: auto auto;
